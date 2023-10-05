@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Latihan DOM</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let h3 = document.createElement("h3"); //membuat element
+		//menambahkan data pada tabel
+		h3.innerHTML = 'Daftar Perawatan Kendaraan PT. XYZ';
+		h3.style.textAlign = 'center';
+		h3.style.color = 'blue';
+		//menampilkan judul di dalam body
+		document.body.appendChild(h3);
+	</script>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+	<thead>
+		<tr bgcolor="greenyellow">
+		<script>
+			//buat daftar judul kolom
+			let judul = ['No','Nopol','Nama Kendaraan','KM Awal','KM Akhir','Biaya Ganti Oli','Biaya Service', 'Total Biaya'];
+			for(jdl of judul){
+				document.write(`<th>${jdl}</th>`);
+			}	
+		</script>	
+		</tr>
+	</thead>
+	<tbody id="data">
+		<tr>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+	</tbody>
+
+</table>
+<script type="text/javascript">
+
+//array 1 dimensi (array scalar)
+let k1 = {'nopol':'1111', 'nama':'Bus','km_awal':3500,'km_akhir':5400};
+
+let k2 = {'nopol':'1112', 'nama':'Bus','km_awal':7000,'km_akhir':10000};
+
+let k3 = {'nopol':'1113', 'nama':'Van','km_awal':8908,'km_akhir':12342};
+
+let k4 = {'nopol':'1114', 'nama':'Van','km_awal':125,'km_akhir':200};
+
+let k5 = {'nopol':'1115', 'nama':'Sedan','km_awal':4000,'km_akhir':6000};
+
+let k6 = {'nopol':'1116', 'nama':'Sedan','km_awal':123,'km_akhir':1234};
+
+let k7 = {'nopol':'1117', 'nama':'Sedan','km_awal':8000,'km_akhir':15000};
+
+let kendaraan = [k1,k2,k3,k4,k5,k6,k7];
+let data_kdr = '';
+let no = 1;
+for(kdr of kendaraan){
+	let biayaGantiOli = 0;
+	let biayaService = 0;
+	if (kdr.km_akhir - kdr.km_awal >= 1000) {
+		switch (kdr.nama) {
+			case 'Bus':
+				biayaGantiOli = 750000;
+				break;
+			case 'Van':
+				biayaGantiOli = 500000;
+				break;
+			case 'Sedan':
+				biayaGantiOli = 300000;
+				break;
+			default:
+				biayaGantiOli = 0;
+		}
+	}
+
+	if (kdr.km_akhir - kdr.km_awal >= 2500) {
+		switch (kdr.nama) {
+			case 'Bus':
+				biayaService = 1500000;
+				break;
+			case 'Van':
+				biayaService = 1000000;
+				break;
+			case 'Sedan':
+				biayaService = 750000;
+				break;
+			default:
+				biayaService = 0;
+		}
+	}
+	//warna-warni
+	warna = (no % 2 == 0) ? "khaki":"beige";
+	data_kdr += `<tr bgcolor="${warna}">
+			<td>${no++}</td>
+			<td>${kdr.nopol}</td>
+			<td>${kdr.nama}</td>
+			<td>${kdr.km_awal}</td>
+			<td>${kdr.km_akhir}</td>
+			<td>${biayaGantiOli}</td>
+			<td>${biayaService}</td>
+			<td>${biayaGantiOli + biayaService}</td>
+		</tr>`;
+}
+document.getElementById("data").innerHTML = data_kdr;
+</script>
+</body>
+</html>
